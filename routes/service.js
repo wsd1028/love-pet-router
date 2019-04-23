@@ -49,9 +49,7 @@ router.post("/add", async function(req, res) {
   res.send(data);
 });
 
-
 router.put("/updateServiceType/:id", async function(req, res) {
-  console.log(1);
   let { name, time, price } = req.body;
   let id = req.params.id;
   let data = await client.put("/serviceType/" + id, { name, time, price });
@@ -115,6 +113,25 @@ router.get("/getWaiter/:id", async function(req, res) {
   let id = req.params.id;
   let data = await client.get("/shops/" + id);
   res.send(data.shopWaiter);
+});
+
+router.get("/getUpdateService/:id", async function(req, res) {
+  let id = req.params.id;
+  let data = await client.get("/service/" + id, {
+    submitType: "findJoin",
+    ref: ["shops", "serviceType"]
+  });
+  res.send(data);
+});
+
+router.put("/updateService/:id", async function(req, res) {
+  let { name, useTtime, price,schedule,waiter,serviceTypeId,waiterLevel } = req.body;
+  let id = req.params.id;
+  let data = await client.put("/service/" + id, { name, useTtime, price,schedule,waiter,waiterLevel,serviceType: {
+    $ref: "serviceType",
+    $id: serviceTypeId
+  } });
+  res.send(data);
 });
 
 module.exports = router;
