@@ -23,10 +23,20 @@ router.get("/getServiceType", async function(req, res) {
   res.send(data);
 });
 
-router.delete("/delete/:id", async function(req, res) {
-  let id = req.params.id;
-  let data = await client.delete("/serviceType/" + id);
-  res.send(data);
+router.delete("/delete", async function(req, res) {
+  let { id, shopId } = req.body;
+  let data1 = await client.get("/service", {
+    submitType: "findJoin",
+    ref: ["serviceType"],
+    "shops.$id": shopId
+  });
+  for (let i = 0; i < data1.length; i++) {
+    if (data1[i].serviceType._id == id) {
+      await client.delete("/service/" + data1[i]._id);
+    }
+  }
+  let data2 = await client.delete("/serviceType/" + id);
+  res.send(data2);
 });
 
 router.get("/serviceType/:id", async function(req, res) {
@@ -125,12 +135,28 @@ router.get("/getUpdateService/:id", async function(req, res) {
 });
 
 router.put("/updateService/:id", async function(req, res) {
-  let { name, useTtime, price,schedule,waiter,serviceTypeId,waiterLevel } = req.body;
+  let {
+    name,
+    useTtime,
+    price,
+    schedule,
+    waiter,
+    serviceTypeId,
+    waiterLevel
+  } = req.body;
   let id = req.params.id;
-  let data = await client.put("/service/" + id, { name, useTtime, price,schedule,waiter,waiterLevel,serviceType: {
-    $ref: "serviceType",
-    $id: serviceTypeId
-  } });
+  let data = await client.put("/service/" + id, {
+    name,
+    useTtime,
+    price,
+    schedule,
+    waiter,
+    waiterLevel,
+    serviceType: {
+      $ref: "serviceType",
+      $id: serviceTypeId
+    }
+  });
   res.send(data);
 });
 
