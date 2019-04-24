@@ -88,12 +88,6 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
-<<<<<<< HEAD
-module.exports = app;
-app.listen(3000, function() {
-  console.log("服务器已启动...");
-});
-=======
 // app.listen(3000, function() {
 //     console.log('服务器已启动...')
 // })
@@ -101,5 +95,4 @@ module.exports = app;
 app.listen(3000, function() {
     console.log('服务器已启动...')
 })
->>>>>>> cc11676c7e2263e49304c51e253ac04214881411
 // module.exports = app;
