@@ -23,15 +23,15 @@ router.get("/:id", async function(req, res) {
 });
 //增加供应商
 router.post("/addSuppliers", async function(req, res) {
-  let { name, phone, adress } = req.body;
-  let data = await client.post("/supplier", { name,phone,adress });
+  let { name, phone, adress, pepole } = req.body;
+  let data = await client.post("/supplier", { name,phone,adress, pepole });
   res.send(data);
 });
 //修改供应商
 router.put("/:id", async function(req, res) {
-  let { name, phone, adress} = req.body;
+  let { name, phone, adress, pepole} = req.body;
   let id = req.params.id;
-  let data = await client.put("/supplier/" + id, {name,phone,adress});
+  let data = await client.put("/supplier/" + id, {name,phone,adress, pepole});
   res.send(data);
 });
 
