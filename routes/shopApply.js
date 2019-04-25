@@ -7,8 +7,8 @@ client.url("localhost:8080");
 
 //门店申请
 router.post("/", async function(req, res) {
-  let { name,status, number, image, address, location, boss, phone, headImg,feature,vipLevel,commission,shopWaiter,comment} = req.body;
-  let data = await client.post("/shops", { name,status, number, image, address, location, boss, phone, headImg,feature,vipLevel,commission,shopWaiter,comment} );
+  let { name,status,number,userId,city,cityLocation, image, address, location, boss, phone, headImg,feature,vipLevel,commission,shopWaiter,comment} = req.body;
+  let data = await client.post("/shops", { name,status,number,userId,city,cityLocation, image, address, location, boss, phone, headImg,feature,vipLevel,commission,shopWaiter,comment} );
   res.send(data);
 });
 
@@ -45,11 +45,11 @@ router.get("/getSession",function(req,res){
   res.send(data||{});
 })
 
-//修改用户集合的状态
-router.put("/userStatus/:id", async function(req, res) {
-  let {status} = req.body;
-  let id = req.params.id;
-  let data = await client.put("/shopUsers/" + id, {status});
-  res.send(data);
-});
+// //修改用户集合的状态
+// router.put("/userStatus/:id", async function(req, res) {
+//   let {status} = req.body;
+//   let id = req.params.userId;
+//   let data = await client.put("/shopUsers/" + id, {status});
+//   res.send(data);
+// });
 module.exports = router;
