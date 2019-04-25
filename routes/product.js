@@ -8,57 +8,146 @@ var multiparty = require("multiparty")
 //商品管理
 
 //查询所有
-router.get("/", async function(req, res) {
-    let { page, rows, type, value } = req.query;
+router.get("/", async function (req, res) {
+    let {
+        page,
+        rows,
+        type,
+        value
+    } = req.query;
     let option = {};
     if (type && value) {
         option = {
             [type]: value
         }
     }
-    let data = await client.get("/products", { page, rows, submitType: "findJoin", ref: ["supplier", "shops"],...option })
-    res.send(data);
+    let data = await client.get("/products", {
+        submitType: "findJoin",
+        ref: ["supplier", "shops"],
+        page,
+        rows,
+        ...option
+    })
     // console.log(data)
+
+    res.send(data);
+});
+
+//查询所有供应商
+router.get("/supplier", async function (req, res) {
+    let data = await client.get("/supplier")
+    res.send(data);
 });
 
 //根据ID查询商品
-router.get("/:id", async function(req, res) {
+router.get("/:id", async function (req, res) {
     let id = req.params.id;
-    let data = await client.get("/products/" + id);
+    let data = await client.get("/products/" + id, {
+        submitType: "findJoin",
+        ref: ["supplier", "shops"]
+    });
     res.send(data);
 });
 
 //增加商品
-router.post("/addPro", async function(req, res) {
-    let { name, type, totalNum,material,petSize,petType,weight,taste,effect,country,date,freshDate,company,explain,price,image} = req.body;
-    let data = await client.post("/products", {name, type, totalNum,material,petSize,petType,weight,taste,effect,country,date,freshDate,company,explain,price,image});
+router.post("/addPro", async function (req, res) {
+    let {
+        name,
+        type,
+        totalNum,
+        material,
+        petSize,
+        petType,
+        weight,
+        taste,
+        effect,
+        country,
+        date,
+        freshDate,
+        company,
+        explain,
+        price,
+        image
+    } = req.body;
+    let data = await client.post("/products", {
+        name,
+        type,
+        totalNum,
+        material,
+        petSize,
+        petType,
+        weight,
+        taste,
+        effect,
+        country,
+        date,
+        freshDate,
+        company,
+        explain,
+        price,
+        image,
+    });
     res.send(data);
 });
 
 //删除商品
-router.delete("/delete/:id", async function(req, res) {
+router.delete("/delete/:id", async function (req, res, next) {
     let id = req.params.id;
     let data = await client.delete("/products/" + id);
     res.send({
-        status:1
+        status: 1
     });
 });
 
 //修改商品信息
-router.put("/:id", async function(req, res) {  
+router.put("/:id", async function (req, res) {
     // console.log(1)
-    let {  name, type, totalNum,material,petSize,petType,weight,taste,effect,country,date,freshDate,company,explain,price,image} = req.body;
+    let {
+        name,
+        type,
+        totalNum,
+        material,
+        petSize,
+        petType,
+        weight,
+        taste,
+        effect,
+        country,
+        date,
+        freshDate,
+        company,
+        explain,
+        price,
+        image
+    } = req.body;
     let id = req.params.id;
-    let data = await client.put("/products/" + id, { name, type, totalNum,material,petSize,petType,weight,taste,effect,country,date,freshDate,company,explain,price,image});
+    let data = await client.put("/products/" + id, {
+        name,
+        type,
+        totalNum,
+        material,
+        petSize,
+        petType,
+        weight,
+        taste,
+        effect,
+        country,
+        date,
+        freshDate,
+        company,
+        explain,
+        price,
+        image
+    });
     res.send(data);
 });
 
 //上传图片
-router.post('/upload', function(req, res) {
+router.post('/upload', function (req, res) {
     let form = new multiparty.Form({
         uploadDir: './public/upload' //保存的路径
     });
-    form.parse(req, function(err, fields, files) {
+    form.parse(req, function (err, fields, files) {
         let key = Object.keys(files)[0]; //获取上传信息中的key
         if (err) {
             res.send(err);
@@ -67,4 +156,7 @@ router.post('/upload', function(req, res) {
         }
     })
 })
+
+//统计路由
+
 module.exports = router;
