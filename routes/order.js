@@ -234,6 +234,37 @@ router.get("/getTradeNum", async function(req, res) {
     ref: ["shops"],
     "shops.$id": id
   });
+  let arr = [];
+  for (let i = 0; i < data.length; i++) {
+    let date = data[0].date;
+    let month = parseInt(date.split("年")[1].split("月")[0]);
+    switch (month) {
+      case (month = 1):
+
+      case (month = 2):
+
+      case (month = 3):
+
+      case (month = 4):
+
+      case (month = 5):
+
+      case (month = 6):
+
+      case (month = 7):
+
+      case (month = 8):
+
+      case (month = 9):
+
+      case (month = 10):
+
+      case (month = 11):
+
+      case (month = 12):
+        break;
+    }
+  }
   res.send(data);
 });
 
