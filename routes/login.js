@@ -7,7 +7,7 @@ client.url("localhost:8080");
 router.post("/", async function(req, res) {
   let { phone, pwd } = req.body;
   let data = await client.get("/sysUsers", { findType: "exact", phone, pwd });
-  console.log(data[0], "平台管理员");
+  // console.log(data[0], "平台管理员");
   if (data[0]) {
     req.session.user = data[0];
     res.send({
@@ -23,7 +23,7 @@ router.post("/", async function(req, res) {
 router.post("/shopManagerLogin", async function(req, res) {
   let { phone, pwd } = req.body;
   let data = await client.get("/shopUsers", { findType: "exact", phone, pwd });
-  console.log(data[0]);
+  // console.log(data[0]);
   if (data[0]) {
     req.session.shopManager = data[0];
     res.send(data[0]);

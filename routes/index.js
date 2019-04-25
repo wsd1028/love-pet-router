@@ -5,7 +5,7 @@ client.url("localhost:8080");
 
 //获取平台管理员session
 router.get("/getSession", function(req, res) {
-  console.log("session 中的data");
+  // console.log("session 中的data");
   let data = req.session.user;
   res.send(data || {});
 });
