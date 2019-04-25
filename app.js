@@ -5,21 +5,6 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
 
-<<<<<<< HEAD
-var loginRouter = require('./routes/login');
-var registerRouter = require('./routes/register');
-var manageRouter = require('./routes/manage');
-var orderRouter = require('./routes/order');
-var petMasterRouter = require('./routes/petMaster');
-var productRouter = require('./routes/product');
-var serviceRouter = require('./routes/service');
-var shopApplyRouter = require('./routes/shopApply');
-var shopManageRouter = require('./routes/shopManage');
-var shopSysRouter = require('./routes/shopSys');
-var supplierRouter = require('./routes/supplier');
-var userSysRouter = require('./routes/userSys');
-var allProductSaleroomRouter=require('./routes/allProductSaleroom')
-=======
 var IndexRouter = require("./routes/index");
 var loginRouter = require("./routes/login");
 var registerRouter = require("./routes/register");
@@ -34,7 +19,8 @@ var shopSysRouter = require("./routes/shopSys");
 var supplierRouter = require("./routes/supplier");
 var userSysRouter = require("./routes/userSys");
 var shopManagerRouter = require("./routes/shopManager");
->>>>>>> dev
+var allProductSaleroomRouter=require('./routes/allProductSaleroom')
+
 
 var app = express();
 // view engine setup
@@ -87,14 +73,10 @@ app.use("/shopManage", shopManageRouter);
 //门店管理管理
 app.use("/shopSys", shopSysRouter);
 //供应商管理
-<<<<<<< HEAD
-app.use('/supplier', supplierRouter);
-//总销售额统计
-app.use('/allProductSaleroom', allProductSaleroomRouter);
-
-=======
 app.use("/supplier", supplierRouter);
->>>>>>> dev
+//总销售额
+app.use("/allProductSaleroom", allProductSaleroomRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
