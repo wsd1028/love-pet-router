@@ -226,4 +226,17 @@ router.put("/serve/:id", async function(req, res) {
   res.send(data);
 });
 
+//统计店铺商品销量
+router.get("/getTradeNum", async function(req, res) {
+  let id = "5cbae16ce0d4c6dae46facd4";
+  let data = await client.get("/order", {
+    submitType: "findJoin",
+    ref: ["shops"],
+    "shops.$id": id
+  });
+  res.send(data);
+});
+
+//统计店铺服务销量
+
 module.exports = router;
