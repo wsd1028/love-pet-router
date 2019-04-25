@@ -88,15 +88,8 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
-<<<<<<< HEAD
 // app.listen(3000, function() {
 //     console.log('服务器已启动...')
 // })
 
 module.exports = app;
-=======
-// module.exports = app;
-app.listen(3000, function() {
-  console.log("服务器已启动...");
-});
->>>>>>> b4ad79580acb19400a533d73feed9b0f0a61e364
