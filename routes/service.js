@@ -43,7 +43,6 @@ router.get("/", async function(req, res) {
       data[i].address
     ]);
   }
-  console.log("shops", shops);
   res.send(shops);
 });
 
