@@ -39,14 +39,14 @@ router.post("/addSuppliers", async function (req, res) {
     name,
     phone,
     adress,
-    pepole,
+    people,
     img
   } = req.body;
   let data = await client.post("/supplier", {
     name,
     phone,
     adress,
-    pepole,
+    people,
     img
   });
   res.send(data);
@@ -57,7 +57,7 @@ router.put("/:id", async function (req, res) {
     name,
     phone,
     adress,
-    pepole,
+    people,
     img
   } = req.body;
   let id = req.params.id;
@@ -65,7 +65,7 @@ router.put("/:id", async function (req, res) {
     name,
     phone,
     adress,
-    pepole,
+    people,
     img
   });
   res.send(data);
