@@ -43,8 +43,6 @@ router.get("/shopUsers", async function(req, res) {
   res.send(data);
 });
 
-
-
 //获取门店管理员session
 router.get("/shopManager/getSession", function(req, res) {
   let data = req.session.shopManager;
@@ -72,6 +70,13 @@ router.get("/oneShop", async function(req, res) {
     data = await client.get("/shopUsers");
   }
   // console.log(data);
+  res.send(data);
+});
+
+//通过id 查询店铺
+router.get("/shop", async function(req, res) {
+  let id = req.query.id;
+  let data = await client.get("/shops/" + id);
   res.send(data);
 });
 
