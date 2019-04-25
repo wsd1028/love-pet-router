@@ -18,7 +18,7 @@ router.get("/commodity", async function(req, res) {
     if (type == "$id") {
       let data = await client.get("/order/" + value, {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "products"],
         page,
         rows
       });
@@ -26,7 +26,7 @@ router.get("/commodity", async function(req, res) {
     } else {
       let data = await client.get("/order", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "products"],
         page,
         rows,
         ...option,
@@ -38,7 +38,7 @@ router.get("/commodity", async function(req, res) {
     if (type == "$id") {
       let data = await client.get("/order/" + value, {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "products"],
         page,
         rows
       });
@@ -47,7 +47,7 @@ router.get("/commodity", async function(req, res) {
       data1 = {};
       let data = await client.get("/order", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "products"],
         page,
         rows,
         ...option,
@@ -55,7 +55,7 @@ router.get("/commodity", async function(req, res) {
       });
       let data2 = await client.get("/order", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "products"],
         page,
         rows,
         ...option,
@@ -64,7 +64,7 @@ router.get("/commodity", async function(req, res) {
       data1.curpage = parseInt(page);
       data1.eachpage = parseInt(rows);
       data1.total = data.total + data2.total;
-      data1.rows = [...data.rows,...data2.rows];
+      data1.rows = [...data.rows, ...data2.rows];
       res.send(data1);
     }
   }
@@ -73,7 +73,7 @@ router.get("/commodity", async function(req, res) {
 // 修改商品状态
 router.put("/commodity/:id", async function(req, res) {
   let id = req.params.id;
-  let data = await client.put("/order/" + id, { status:"2" });
+  let data = await client.put("/order/" + id, { status: "2" });
   res.send(data);
 });
 
@@ -92,7 +92,7 @@ router.get("/serve", async function(req, res) {
     if (type == "$id") {
       let data = await client.get("/serviceOrder/" + value, {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         page,
         rows
       });
@@ -101,7 +101,7 @@ router.get("/serve", async function(req, res) {
       data1 = {};
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         status: "1"
       });
       let i = 0;
@@ -123,7 +123,7 @@ router.get("/serve", async function(req, res) {
       data1 = {};
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         status: "1"
       });
       let i = 0;
@@ -144,7 +144,7 @@ router.get("/serve", async function(req, res) {
     } else {
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         page,
         rows,
         ...option,
@@ -156,7 +156,7 @@ router.get("/serve", async function(req, res) {
     if (type == "$id") {
       let data = await client.get("/serviceOrder/" + value, {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         page,
         rows
       });
@@ -165,7 +165,7 @@ router.get("/serve", async function(req, res) {
       data1 = {};
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         status: "0"
       });
       let i = 0;
@@ -187,7 +187,7 @@ router.get("/serve", async function(req, res) {
       data1 = {};
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         status: "0"
       });
       let i = 0;
@@ -208,7 +208,7 @@ router.get("/serve", async function(req, res) {
     } else {
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
-        ref: ["shops", "users"],
+        ref: ["shops", "users", "service"],
         page,
         rows,
         ...option,
@@ -225,5 +225,49 @@ router.put("/serve/:id", async function(req, res) {
   let data = await client.put("/serviceOrder/" + id, { status: "1" });
   res.send(data);
 });
+
+//统计店铺商品销量
+router.get("/getTradeNum", async function(req, res) {
+  let id = "5cbae16ce0d4c6dae46facd4";
+  let data = await client.get("/order", {
+    submitType: "findJoin",
+    ref: ["shops"],
+    "shops.$id": id
+  });
+  let arr = [];
+  for (let i = 0; i < data.length; i++) {
+    let date = data[0].date;
+    let month = parseInt(date.split("年")[1].split("月")[0]);
+    switch (month) {
+      case (month = 1):
+
+      case (month = 2):
+
+      case (month = 3):
+
+      case (month = 4):
+
+      case (month = 5):
+
+      case (month = 6):
+
+      case (month = 7):
+
+      case (month = 8):
+
+      case (month = 9):
+
+      case (month = 10):
+
+      case (month = 11):
+
+      case (month = 12):
+        break;
+    }
+  }
+  res.send(data);
+});
+
+//统计店铺服务销量
 
 module.exports = router;
