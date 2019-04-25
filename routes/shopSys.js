@@ -4,6 +4,12 @@ const client = require("ykt-http-client");
 client.url("localhost:8080");
 
 //门店管理
+//查询所有的服务订单
+router.get("/order", async function(req, res) {
+let shopId = req.query.shopId;
+        let data = await client.get("/serviceOrder",{"shops.$id":shopId});
+        res.send(data);
+    });
 
 //查询所有的门店
 router.get("/", async function(req, res) {
@@ -25,6 +31,14 @@ router.get("/:id", async function(req, res) {
     res.send(data);
 });
 
+//修改用户集合的状态
+router.put("/user/:id", async function(req, res) {
+    let {status} = req.body;
+    let id = req.params.id;
+    let data = await client.put("/shopUsers/" + id, {status});
+    res.send(data);
+  });
+
 // 修改门店状态
 router.put("/:id", async function(req, res) {
     let {status} = req.body;
@@ -32,4 +46,7 @@ router.put("/:id", async function(req, res) {
     let data = await client.put("/shops/" + id, {status});
     res.send(data);
 });
+
+//统计图路由
+
 module.exports = router;
