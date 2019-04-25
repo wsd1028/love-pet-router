@@ -10,7 +10,11 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-session": "^1.16.1",
+<<<<<<< HEAD
     "http-errors": "^1.6.3",
+=======
+    "http-errors": "~1.6.2",
+>>>>>>> bca38a53be7be2f4b1937df817ca7de6a75331ab
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "multiparty": "^4.2.1",
