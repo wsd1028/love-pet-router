@@ -17,6 +17,7 @@ var shopManageRouter = require('./routes/shopManage');
 var shopSysRouter = require('./routes/shopSys');
 var supplierRouter = require('./routes/supplier');
 var userSysRouter = require('./routes/userSys');
+var allProductSaleroomRouter=require('./routes/allProductSaleroom')
 
 var app = express();
 // view engine setup
@@ -64,6 +65,9 @@ app.use('/shopManage', shopManageRouter);
 app.use('/shopSys', shopSysRouter);
 //供应商管理
 app.use('/supplier', supplierRouter);
+//总销售额统计
+app.use('/allProductSaleroom', allProductSaleroomRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
