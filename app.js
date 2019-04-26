@@ -91,11 +91,7 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
-// app.listen(3000, function() {
-//     console.log('服务器已启动...')
-// })
-module.exports = app;
-<<<<<<< HEAD
-=======
-
->>>>>>> afc3b2c625f578dd4fdf49cdbd588179b3adb96f
+app.listen(3000, function() {
+    console.log('服务器已启动...')
+})
+// module.exports = app;
