@@ -49,22 +49,41 @@ router.put("/:id", async function (req, res) {
     res.send(data);
 
 });
-// //会员卡
-// router.get('/vip',async function(req,res){
-//     let id=req.query.id;
-//     //  console.log(id)
-//      let data = await client.get("/users",{ 
-//         submitType: "findJoin",
-//         ref:"vip"
-//     });
-//      console.log(data[0].petMaster._id)
-//     if(id===data[0].petMaster._id){
-//         // console.log(data)
-//         res.send(data);
-//     }else{
-//         res.send("0");
-//     }
-//  });
+//查询所有订单
+router.get("/serviceOrder", async function (req, res) {
+    // let {
+    //     page,
+    //     rows,
+    //     type,
+    //     value
+    // } = req.query;
+    // let option = {};
+    // if (type && value) {
+    //     option = {
+    //         [type]: value
+    //     }
+    // }
+    let data = await client.get("/serviceOrder",{
+        submitType: "findJoin",
+        ref:["service","shops"]
+    });
+    let arr=[];
+    console.log(data,"data");
+    
+    for(let i in data){
+        
+        if(data[i].status==1){
+            arr.push(data[i]);
+        }
+      
+    }
+    
+    
+      res.send(arr);
+      console.log(arr);
+      
+    
+});
 // 获取各个城市的店铺数
 router.get("/counts", function(req,res) {
     const shops = [
