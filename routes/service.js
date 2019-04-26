@@ -36,9 +36,14 @@ router.get("/", async function(req, res) {
   let shops = [];
   let data = await client.get("/shops");
   for (let i = 0; i < data.length; i++) {
-    shops.push([parseFloat(data[i].location.longitude),parseFloat(data[i].location.latitude),data[i].name,data[i].address])
+    shops.push([
+      parseFloat(data[i].location.longitude),
+      parseFloat(data[i].location.latitude),
+      data[i].name,
+      data[i].address
+    ]);
   }
-  console.log("shops",shops)
+  console.log("shops", shops);
   res.send(shops);
 });
 
@@ -158,12 +163,6 @@ router.post("/addServices", async function(req, res) {
   res.send(data);
 });
 
-router.get("/getWaiter/:id", async function(req, res) {
-  let id = req.params.id;
-  let data = await client.get("/shops/" + id);
-  res.send(data.shopWaiter);
-});
-
 router.get("/getUpdateService/:id", async function(req, res) {
   let id = req.params.id;
   let data = await client.get("/service/" + id, {
@@ -176,7 +175,7 @@ router.get("/getUpdateService/:id", async function(req, res) {
 router.put("/updateService/:id", async function(req, res) {
   let {
     name,
-    useTtime,
+    useTime,
     price,
     schedule,
     waiter,
@@ -186,7 +185,7 @@ router.put("/updateService/:id", async function(req, res) {
   let id = req.params.id;
   let data = await client.put("/service/" + id, {
     name,
-    useTtime,
+    useTime,
     price,
     schedule,
     waiter,
@@ -198,5 +197,10 @@ router.put("/updateService/:id", async function(req, res) {
   });
   res.send(data);
 });
-
+router.get("/getWaiter/:id", async function(req, res) {
+  let id = req.params.id;
+  console.log(id);
+  let data = await client.get("/shops/" + id);
+  res.send(data.shopWaiter);
+});
 module.exports = router;
