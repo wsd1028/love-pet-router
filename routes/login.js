@@ -23,10 +23,6 @@ router.post("/", async function(req, res) {
 router.post("/shopManagerLogin", async function(req, res) {
   let { phone, pwd } = req.body;
   let data = await client.get("/shopUsers", { findType: "exact", phone, pwd });
-<<<<<<< HEAD
-=======
-  // console.log(data[0]);
->>>>>>> 34857c8282757b8234281937bdbe2ea8d7fcb9af
   if (data[0]) {
     req.session.shopManager = data[0];
     res.send(data[0]);
