@@ -23,7 +23,6 @@ router.post("/", async function(req, res) {
 router.post("/shopManagerLogin", async function(req, res) {
   let { phone, pwd } = req.body;
   let data = await client.get("/shopUsers", { findType: "exact", phone, pwd });
-  console.log(data[0]);
   if (data[0]) {
     req.session.shopManager = data[0];
     res.send(data[0]);
@@ -57,7 +56,6 @@ router.get("/shopManager/removeSession", function(req, res) {
 
 //店铺对应的门店管理员
 router.get("/oneShop", async function(req, res) {
-  // console.log(req.query);
   let shopUserId = req.query.shopUserId;
   let data;
   if (shopUserId) {
@@ -69,7 +67,6 @@ router.get("/oneShop", async function(req, res) {
   } else {
     data = await client.get("/shopUsers");
   }
-  // console.log(data);
   res.send(data);
 });
 
