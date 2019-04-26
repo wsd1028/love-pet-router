@@ -48,9 +48,9 @@ router.get("/shopManager/getSession", function(req, res) {
   res.send(data || {});
 });
 
-//移除平台管理员session
+//移除门店管理员session
 router.get("/shopManager/removeSession", function(req, res) {
-  req.session.user = shopManager;
+  req.session.shopManager = null;
   res.send({ status: 1 });
 });
 

@@ -20,6 +20,7 @@ var supplierRouter = require("./routes/supplier");
 var userSysRouter = require("./routes/userSys");
 var shopManagerRouter = require("./routes/shopManager");
 
+
 var app = express();
 // view engine setup
 
@@ -72,6 +73,8 @@ app.use("/shopManage", shopManageRouter);
 app.use("/shopSys", shopSysRouter);
 //供应商管理
 app.use("/supplier", supplierRouter);
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -88,8 +91,18 @@ app.use(function(err, req, res, next) {
   res.render("error");
 });
 
+
 app.listen(3000, function() {
     console.log('服务器已启动...')
 })
 // module.exports = app;
 
+// app.listen(3000, function() {
+//     console.log('服务器已启动...')
+// })
+module.exports = app;
+<<<<<<< HEAD
+=======
+>>>>>>> 07e9e84c0b51fe61e3f4b07b96e63c18632a2022
+
+>>>>>>> afc3b2c625f578dd4fdf49cdbd588179b3adb96f
