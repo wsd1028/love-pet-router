@@ -8,6 +8,7 @@ client.url("localhost:8080");
 router.get("/commodity", async function(req, res) {
   let { page, rows, type, value } = req.query;
   let trade = req.query.trade;
+  let id = req.query.id;
   let option = {};
   if (type && value) {
     option = {
@@ -20,7 +21,8 @@ router.get("/commodity", async function(req, res) {
         submitType: "findJoin",
         ref: ["shops", "users", "products"],
         page,
-        rows
+        rows,
+        "shops.$id": id
       });
       res.send(data);
     } else {
@@ -30,7 +32,8 @@ router.get("/commodity", async function(req, res) {
         page,
         rows,
         ...option,
-        status: "1"
+        status: "1",
+        "shops.$id": id
       });
       res.send(data);
     }
@@ -51,7 +54,8 @@ router.get("/commodity", async function(req, res) {
         page,
         rows,
         ...option,
-        status: "0"
+        status: "0",
+        "shops.$id": id
       });
       let data2 = await client.get("/order", {
         submitType: "findJoin",
@@ -59,7 +63,8 @@ router.get("/commodity", async function(req, res) {
         page,
         rows,
         ...option,
-        status: "2"
+        status: "2",
+        "shops.$id": id
       });
       data1.curpage = parseInt(page);
       data1.eachpage = parseInt(rows);
@@ -81,6 +86,7 @@ router.put("/commodity/:id", async function(req, res) {
 router.get("/serve", async function(req, res) {
   let { page, rows, type, value } = req.query;
   let serve = req.query.serve;
+  let id = req.query.id;
   let option = {};
   let data1 = {};
   if (type && value) {
@@ -102,7 +108,8 @@ router.get("/serve", async function(req, res) {
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
         ref: ["shops", "users", "service"],
-        status: "1"
+        status: "1",
+        "shops.$id": id
       });
       let i = 0;
       data1.curpage = parseInt(page);
@@ -124,7 +131,8 @@ router.get("/serve", async function(req, res) {
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
         ref: ["shops", "users", "service"],
-        status: "1"
+        status: "1",
+        "shops.$id": id
       });
       let i = 0;
       data1.curpage = parseInt(page);
@@ -148,7 +156,8 @@ router.get("/serve", async function(req, res) {
         page,
         rows,
         ...option,
-        status: "1"
+        status: "1",
+        "shops.$id": id
       });
       res.send(data);
     }
@@ -158,7 +167,8 @@ router.get("/serve", async function(req, res) {
         submitType: "findJoin",
         ref: ["shops", "users", "service"],
         page,
-        rows
+        rows,
+        "shops.$id": id
       });
       res.send(data);
     } else if (type == "name") {
@@ -166,7 +176,8 @@ router.get("/serve", async function(req, res) {
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
         ref: ["shops", "users", "service"],
-        status: "0"
+        status: "0",
+        "shops.$id": id
       });
       let i = 0;
       data1.curpage = parseInt(page);
@@ -188,7 +199,8 @@ router.get("/serve", async function(req, res) {
       let data = await client.get("/serviceOrder", {
         submitType: "findJoin",
         ref: ["shops", "users", "service"],
-        status: "0"
+        status: "0",
+        "shops.$id": id
       });
       let i = 0;
       data1.curpage = parseInt(page);
@@ -212,7 +224,8 @@ router.get("/serve", async function(req, res) {
         page,
         rows,
         ...option,
-        status: "0"
+        status: "0",
+        "shops.$id": id
       });
       res.send(data);
     }
