@@ -29,9 +29,10 @@ router.post("/upload",function(req,res){
 
 //添加绑定门店
 router.put("/addShops/:id", async function(req, res) {
+  let id = req.params.id;
   let {status,shopsId} = req.body
   console.log(status,shopsId)
-  let id = req.params.id;
+  console.log("id",id)
   let data = await client.put("/shopUsers/" + id, {status,shops:{
     $ref:"shops",
     $id:shopsId
