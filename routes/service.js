@@ -8,7 +8,9 @@ router.get("/counts", async function(req, res) {
   let shopSet = new Set();
   let data = await client.get("/shops");
   for (let i = 0; i < data.length; i++) {
-    shopSet.add(data[i].city);
+    if (!data[i].status == "no") {
+      shopSet.add(data[i].city);
+    }
   }
   let cityArr = [...shopSet];
 
@@ -18,10 +20,13 @@ router.get("/counts", async function(req, res) {
     let cityLongitude = 0;
     let cityLatitude = 0;
     for (let i = 0; i < data.length; i++) {
-      if (cityArr[j] == data[i].city) {
-        cityNum++;
-        cityIndex = i;
+      if (!data[i].status == "no") {
+        if (cityArr[j] == data[i].city) {
+          cityNum++;
+          cityIndex = i;
+        }
       }
+
       if (i == data.length - 1) {
         cityLongitude = parseFloat(data[cityIndex].cityLocation.longitude);
         cityLatitude = parseFloat(data[cityIndex].cityLocation.latitude);
